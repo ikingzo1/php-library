@@ -29,7 +29,7 @@ class Tree
      * @param array $tree
 	 * @param int $selectid		默认选中的ID
      */
-     public static function selectTreeHtml(&$tree, $selectid = 1, &$step = '', $html = ''){
+     public static function selectTreeHtml(&$tree, $selectid = 1, $step = '', $html = ''){
 		if(empty($tree) || !is_array($tree)) return '';
 		//生成select代码
 		foreach($tree as $v){
@@ -39,10 +39,7 @@ class Tree
 			}
 			$html .= "<option value=\"{$v['id']}\" {$selected}>{$step}{$v['classname']}</option>";
 			if(isset($v['children'])){
-				$step .= '&nbsp;&nbsp;&nbsp;&nbsp;';		
-				$html = self::selectTreeHtml($v['children'], $selectid, $step, $html);		
-			}else{
-				$step = '';
+				$html = self::selectTreeHtml($v['children'], $selectid, $step.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $html);
 			}
 		}
 		return $html;
